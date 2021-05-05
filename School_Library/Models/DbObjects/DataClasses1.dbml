@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="LibrarySchool" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-3FH4SNS\SQLEXPRESS;Initial Catalog=LibrarySchool;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="LibrarySchoolConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Books" Member="Books">
+    <Type Name="Book">
+      <Column Name="IdBook" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Field" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="NumberOfBooks" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumbeOfBooksAvaible" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Book_BorrowedBook" Member="BorrowedBooks" ThisKey="IdBook" OtherKey="IdBook" Type="BorrowedBook" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="IdUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="RegistrationDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNr" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Adress" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="User_BorrowedBook" Member="BorrowedBooks" ThisKey="IdUser" OtherKey="IdUser" Type="BorrowedBook" />
+      <Association Name="User_BorrowedOnlineBook" Member="BorrowedOnlineBooks" ThisKey="IdUser" OtherKey="IdUser" Type="BorrowedOnlineBook" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BorrowedBooks" Member="BorrowedBooks">
+    <Type Name="BorrowedBook">
+      <Column Name="IdBorrowedBook" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdBook" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="IdUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ValildFrom" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ValidTo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsReturned" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Book_BorrowedBook" Member="Book" ThisKey="IdBook" OtherKey="IdBook" Type="Book" IsForeignKey="true" />
+      <Association Name="User_BorrowedBook" Member="User" ThisKey="IdUser" OtherKey="IdUser" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BorrowedOnlineBooks" Member="BorrowedOnlineBooks">
+    <Type Name="BorrowedOnlineBook">
+      <Column Name="IdBorrowedOnlineBook" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IdOnlineBook" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="IdUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ValildFrom" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ValidTo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsAvable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="User_BorrowedOnlineBook" Member="User" ThisKey="IdUser" OtherKey="IdUser" Type="User" IsForeignKey="true" />
+      <Association Name="OnlineBook_BorrowedOnlineBook" Member="OnlineBook" ThisKey="IdOnlineBook" OtherKey="IdOnlineBook" Type="OnlineBook" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OnlineBooks" Member="OnlineBooks">
+    <Type Name="OnlineBook">
+      <Column Name="IdOnlineBook" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Author" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Field" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="IsAvaible" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="OnlineBook_BorrowedOnlineBook" Member="BorrowedOnlineBooks" ThisKey="IdOnlineBook" OtherKey="IdOnlineBook" Type="BorrowedOnlineBook" />
+    </Type>
+  </Table>
+</Database>

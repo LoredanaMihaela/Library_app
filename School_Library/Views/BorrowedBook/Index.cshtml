@@ -1,0 +1,78 @@
+﻿@model IEnumerable<School_Library.Models.BorrowedBookModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDBorrowedBook)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDBook)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsReturned)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDBorrowedBook)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDBook)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsReturned)
+        </td>
+        <td>
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("User"))
+                {
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDBorrowedBook })
+                    @Html.ActionLink("Details", "Details", new { id = item.IDBorrowedBook })
+                }
+            }
+
+
+
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDBorrowedBook })
+                }
+            }
+        </td>
+    </tr>
+}
+
+</table>
