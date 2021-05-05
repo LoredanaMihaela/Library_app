@@ -43,9 +43,9 @@ namespace School_Library.Controllers
         {
             try
             {
-                //BorrowedBookModel borrowedBookModel = new BorrowedBookModel();
-                //UpdateModel(borrowedBookModel);
-                //borrowedBookRepository.InsertBorrowedBook(borrowedBookModel);
+                BorrowedBookModel borrowedBookModel = new BorrowedBookModel();
+                UpdateModel(borrowedBookModel);
+                borrowedBookRepository.InsertBorrowedBook(borrowedBookModel);
 
                 return RedirectToAction("Index");
             }

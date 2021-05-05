@@ -300,6 +300,8 @@
     <Content Include="Views\BorrowedOnlineBook\CreateBorrowedOnlineBook.cshtml" />
     <Content Include="Views\BorrowedOnlineBook\EditBorrowedOnlineBook.cshtml" />
     <Content Include="Views\BorrowedOnlineBook\DeleteBorrowedOnlineBook.cshtml" />
+    <Content Include="Views\BorrowedOnlineBook\Index.cshtml" />
+    <Content Include="Views\BorrowedOnlineBook\BorrowedOnlineBookDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

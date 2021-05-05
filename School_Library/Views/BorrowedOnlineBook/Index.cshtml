@@ -1,0 +1,64 @@
+﻿@model IEnumerable<School_Library.Models.BorrowedOnlineBookModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDBorrowedOnlineBook)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDOnlineBook)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IDUser)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAvaible)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDBorrowedOnlineBook)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDOnlineBook)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAvaible)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDBorrowedOnlineBook}) |
+            @Html.ActionLink("Details", "Details", new { id = item.IDBorrowedOnlineBook }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IDBorrowedOnlineBook })
+        </td>
+    </tr>
+}
+
+</table>

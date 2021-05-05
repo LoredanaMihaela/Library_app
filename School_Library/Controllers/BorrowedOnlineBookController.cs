@@ -12,6 +12,7 @@ namespace School_Library.Controllers
     {
         private BorrowedOnlineBookRepository borrowedOnlineBookRepository = new BorrowedOnlineBookRepository();
         // GET: BorrowedOnlineBook
+        [AllowAnonymous]
         public ActionResult Index()
         {
             List<BorrowedOnlineBookModel> borrowedOnlineBook = borrowedOnlineBookRepository.GetAllBorrowedOnlineBooks();
@@ -19,18 +20,22 @@ namespace School_Library.Controllers
             return View("Index",borrowedOnlineBook);
         }
 
+        [AllowAnonymous]
         // GET: BorrowedOnlineBook/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            BorrowedOnlineBookModel borrowedOnlineBookModel = borrowedOnlineBookRepository.GetBorrowedOnlineBookById(id);
+            return View("BorrowedOnlineBookDetails", borrowedOnlineBookModel);
         }
 
+        [Authorize(Roles = "User,Admin")]
         // GET: BorrowedOnlineBook/Create
         public ActionResult Create()
         {
             return View("CreateBorrowedOnlineBook");
         }
 
+        [Authorize(Roles = "User,Admin")]
         // POST: BorrowedOnlineBook/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -49,6 +54,7 @@ namespace School_Library.Controllers
             }
         }
 
+        [Authorize(Roles = "User,Admin")]
         // GET: BorrowedOnlineBook/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -56,6 +62,7 @@ namespace School_Library.Controllers
             return View("EditBorrowedOnlineBook", borrowedOnlineBookModel);
         }
 
+        [Authorize(Roles = "User,Admin")]
         // POST: BorrowedOnlineBook/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
@@ -76,6 +83,7 @@ namespace School_Library.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         // GET: BorrowedOnlineBook/Delete/5
         public ActionResult Delete(Guid id)
         {
@@ -84,6 +92,7 @@ namespace School_Library.Controllers
             return View("DeleteBorrowedOnlineBook",borrowedOnlineBookModel);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: BorrowedOnlineBook/Delete/5
         [HttpPost]
         public ActionResult Delete(Guid id, FormCollection collection)
