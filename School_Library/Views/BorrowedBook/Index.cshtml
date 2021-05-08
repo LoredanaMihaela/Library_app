@@ -58,7 +58,7 @@
                 if (User.IsInRole("Admin") || User.IsInRole("User"))
                 {
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IDBorrowedBook })
+
                     @Html.ActionLink("Details", "Details", new { id = item.IDBorrowedBook })
                 }
             }
@@ -69,6 +69,7 @@
                 if (User.IsInRole("Admin"))
                 {
                     @Html.ActionLink("Delete", "Delete", new { id = item.IDBorrowedBook })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDBorrowedBook })
                 }
             }
         </td>

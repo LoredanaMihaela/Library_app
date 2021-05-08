@@ -36,8 +36,7 @@ namespace School_Library.Controllers
 
             }
             return View(onlineBook.ToList());
-            //List<OnlineBookModel> onlineBookModels = onlineBookRepository.GetAllOnlineBooks();
-            //return View("Index", onlineBookModels);
+            
         }
         [AllowAnonymous]
         // GET: OnlineBook/Details/5
@@ -47,14 +46,14 @@ namespace School_Library.Controllers
             return View("OnlineBookDetails",onlineBookModel);
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: OnlineBook/Create
         public ActionResult Create()
         {
             return View("CreateOnlineBook");
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: OnlineBook/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -74,7 +73,7 @@ namespace School_Library.Controllers
             }
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: OnlineBook/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -83,7 +82,7 @@ namespace School_Library.Controllers
             return View("EditOnlineBook", onlineBookModel);
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: OnlineBook/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)

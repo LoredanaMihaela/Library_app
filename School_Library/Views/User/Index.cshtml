@@ -64,7 +64,6 @@
                 if (User.IsInRole("Admin") || User.IsInRole("User"))
                 {
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.IDUser })
                     @Html.ActionLink("Details", "Details", new { id = item.IDUser })
                 }
             }
@@ -74,6 +73,8 @@
             @{
                 if (User.IsInRole("Admin"))
                 {
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDUser })
                     @Html.ActionLink("Delete", "Delete", new { id = item.IDUser })
                 }
             }

@@ -54,9 +54,22 @@
             @Html.DisplayFor(modelItem => item.IsAvaible)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDBorrowedOnlineBook}) |
-            @Html.ActionLink("Details", "Details", new { id = item.IDBorrowedOnlineBook }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IDBorrowedOnlineBook })
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("User"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.IDBorrowedOnlineBook })
+                }
+            }
+
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.IDBorrowedOnlineBook }) 
+
+                    @Html.ActionLink("Delete", "Delete", new { id = item.IDBorrowedOnlineBook })
+                }
+            }
+
         </td>
     </tr>
 }

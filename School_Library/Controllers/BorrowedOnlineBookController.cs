@@ -35,7 +35,7 @@ namespace School_Library.Controllers
             return View("CreateBorrowedOnlineBook");
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: BorrowedOnlineBook/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -54,7 +54,7 @@ namespace School_Library.Controllers
             }
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: BorrowedOnlineBook/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -62,7 +62,7 @@ namespace School_Library.Controllers
             return View("EditBorrowedOnlineBook", borrowedOnlineBookModel);
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: BorrowedOnlineBook/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)

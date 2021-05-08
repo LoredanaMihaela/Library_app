@@ -16,30 +16,31 @@ namespace School_Library.Controllers
 
 
         [AllowAnonymous]
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
             var book =from b in bookRepository.GetAllBooks() select b;
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    book = bookRepository.OrderByDescendingParameter("Name");
-                    break;
-                case "author_desc":
-                    book = bookRepository.OrderByDescendingParameter("Author");
-                    break;
-                case "author":
-                    book = bookRepository.OrderByParameter("Author");
-                    break;
-                default:
-                    book = bookRepository.OrderByParameter("Name");
-                    break;
 
-            }
+            
+                switch (sortOrder)
+                {
+                    case "name_desc":
+                        book = bookRepository.OrderByDescendingParameter("Name");
+                        break;
+                    case "author_desc":
+                        book = bookRepository.OrderByDescendingParameter("Author");
+                        break;
+                    case "author":
+                        book = bookRepository.OrderByParameter("Author");
+                        break;
+                    default:
+                        book = bookRepository.OrderByParameter("Name");
+                        break;
 
-            //List < BookModel > books = bookRepository.GetAllBooks();
-            //return View("Index",books);
+                }
+
+            
             return View(book.ToList());
         }
         [AllowAnonymous]
@@ -57,7 +58,7 @@ namespace School_Library.Controllers
             return View("CreateBook");
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: Book/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -83,7 +84,7 @@ namespace School_Library.Controllers
             }
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: Book/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -92,7 +93,7 @@ namespace School_Library.Controllers
             return View("EditBook",bookModel);
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: Book/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)

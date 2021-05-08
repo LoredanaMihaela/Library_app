@@ -37,8 +37,7 @@ namespace School_Library.Controllers
             }
             return View(user.ToList());
 
-            //List<UserModel> userModel = userRepository.GetAllUserss();
-            //return View("Index", userModel);
+           
         }
         [AllowAnonymous]
         // GET: User/Details/5
@@ -48,14 +47,14 @@ namespace School_Library.Controllers
             return View("DetailsUser",userModel);
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: User/Create
         public ActionResult Create()
         {
             return View("CreateUser");
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: User/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -75,7 +74,7 @@ namespace School_Library.Controllers
             }
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // GET: User/Edit/5
         public ActionResult Edit(Guid id)
         {
@@ -83,7 +82,7 @@ namespace School_Library.Controllers
             return View("EditUser",userModel);
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "Admin")]
         // POST: User/Edit/5
         [HttpPost]
         public ActionResult Edit(Guid id, FormCollection collection)
