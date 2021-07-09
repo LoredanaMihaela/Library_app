@@ -37,41 +37,47 @@ namespace School_Library.Repository
             return MapDbObjectToModel(book);
         }
 
-      
+     
 
-        internal List<BookModel> OrderByParameter(string param)
+        public List<BookModel> OrderByAscendingParameter(List<BookModel> books,string param)
         {
-            List<BookModel> bookList = InitializeBookCollection();
-            foreach(Book dbBook in dbContext.Books)
-            
-                AddDbObjectToModelCollection(bookList, dbBook);
-            
-            if(param == "Name")
-            
-                return bookList.OrderBy(x => x.Name).ToList();
-            
-            if(param == "Author")
-            
-                return bookList.OrderBy(x => x.Author).ToList();
-            
-            return bookList;
+            if (param == "Name")
+                return books.OrderBy(x => x.Name).ToList();
+
+            if (param == "Author")
+                return books.OrderBy(x => x.Author).ToList();
+
+            return books;
         }
 
-        internal List<BookModel> OrderByDescendingParameter(string param)
+        public List<BookModel> OrderByDescendingParameter(List<BookModel> books,string param)
         {
-            List<BookModel> bookList = InitializeBookCollection();
-            foreach(Book dbBook in dbContext.Books)
-                AddDbObjectToModelCollection(bookList, dbBook);
             
             if(param == "Name")
-                return bookList.OrderByDescending(x => x.Name).ToList();
+                return books.OrderByDescending(x => x.Name).ToList();
             
             if(param == "Author")
-                return bookList.OrderByDescending(x => x.Author).ToList();
+                return books.OrderByDescending(x => x.Author).ToList();
             
-            return bookList;
+            return books;
         }
 
+    //modif
+
+    public List<BookModel> GetNameBySearch(string name)
+        {
+            List<BookModel> bookList = InitializeBookCollection();
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                foreach(Book dbBook in dbContext.Books.Where(x => x.Name == (name)))
+                {
+                    bookList.Add(MapDbObjectToModel(dbBook));
+                }
+            }
+                
+            return bookList;
+        }
         public void InsertBook(BookModel book)
         {
             book.IDBook = Guid.NewGuid();

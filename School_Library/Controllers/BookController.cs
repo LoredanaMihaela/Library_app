@@ -16,33 +16,43 @@ namespace School_Library.Controllers
 
 
         [AllowAnonymous]
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchName)
         {
+            List<BookModel> books = bookRepository.GetAllBooks();
             ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
-            var book =from b in bookRepository.GetAllBooks() select b;
-
             
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        book = bookRepository.OrderByDescendingParameter("Name");
-                        break;
-                    case "author_desc":
-                        book = bookRepository.OrderByDescendingParameter("Author");
-                        break;
-                    case "author":
-                        book = bookRepository.OrderByParameter("Author");
-                        break;
-                    default:
-                        book = bookRepository.OrderByParameter("Name");
-                        break;
+            books = SortName(books, sortOrder);
 
-                }
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                books = bookRepository.GetNameBySearch(searchName);
+            }
 
-            
-            return View(book.ToList());
+            return View("Index", books);
         }
+
+        private List<BookModel> SortName(List<BookModel> book, string sortOrder)
+        {
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    return bookRepository.OrderByDescendingParameter(book, "Name");
+
+                case "author_desc":
+                    return bookRepository.OrderByDescendingParameter(book,"Author");
+                    
+                case "author":
+                    return bookRepository.OrderByAscendingParameter(book,"Author");
+                   ;
+                default:
+                    return bookRepository.OrderByAscendingParameter(book, "Name");
+                    
+
+            }
+        }
+
+
         [AllowAnonymous]
         // GET: Book/Details/5
         public ActionResult Details(Guid id)

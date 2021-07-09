@@ -10,12 +10,38 @@
 <p>
     @{
         if (User.IsInRole("Admin"))
-        { 
+        {
             @Html.ActionLink("Create New", "Create")
         }
     }
 
 </p>
+
+<div class="partialView">
+    <script>
+        $(document).ready(function () {
+
+            $("#button1").click(function () {
+                $("#div1").load("/Index?handler=Partial");
+            });
+
+        });
+    </script>    
+
+
+        <button  type="button" id="button1">Load Search Name</button>
+
+        <div id="div1"></div>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Search by Name: @Html.TextBox("searchName")
+        <input type="submit" value="Search">
+    </p>
+}
 
 <table class="table">
     <tr>
