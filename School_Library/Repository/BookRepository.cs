@@ -62,9 +62,9 @@ namespace School_Library.Repository
             return books;
         }
 
-    //modif
-
-    public List<BookModel> GetNameBySearch(string name)
+        //modif
+       
+        public List<BookModel> GetNameBySearch(string name)
         {
             List<BookModel> bookList = InitializeBookCollection();
 

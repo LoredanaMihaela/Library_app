@@ -19,6 +19,7 @@ namespace School_Library.Models
         [Required(ErrorMessage = "Mandatory field")]
         public string Field { get; set; }
 
+        [StringLength(250,ErrorMessage ="You can`t type more than 300 chars")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Mandatory field")]

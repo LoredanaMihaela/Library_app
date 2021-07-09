@@ -40,15 +40,13 @@ namespace School_Library.Controllers
                     return bookRepository.OrderByDescendingParameter(book, "Name");
 
                 case "author_desc":
-                    return bookRepository.OrderByDescendingParameter(book,"Author");
-                    
+                    return bookRepository.OrderByDescendingParameter(book, "Author");
+
                 case "author":
-                    return bookRepository.OrderByAscendingParameter(book,"Author");
-                   ;
+                    return bookRepository.OrderByAscendingParameter(book, "Author");
+                    ;
                 default:
                     return bookRepository.OrderByAscendingParameter(book, "Name");
-                    
-
             }
         }
 
