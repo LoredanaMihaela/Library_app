@@ -62,23 +62,6 @@ namespace School_Library.Repository
             return books;
         }
 
-        //modif
-       
-        public List<BookModel> GetNameBySearch(string name)
-        {
-            List<BookModel> bookList = InitializeBookCollection();
-
-            if (!string.IsNullOrEmpty(name))
-            {
-                foreach(Book dbBook in dbContext.Books.Where(x => x.Name == (name)))
-                {
-                    bookList.Add(MapDbObjectToModel(dbBook));
-                }
-            }
-                
-            return bookList;
-        }
-
         public List<BookModel> GetBooksBySearchCriteria(string searchCriteria)
         {
             List<BookModel> bookList = InitializeBookCollection();

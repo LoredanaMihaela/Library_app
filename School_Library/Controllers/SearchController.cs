@@ -1,4 +1,5 @@
-﻿using School_Library.Repository;
+﻿using School_Library.Models;
+using School_Library.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,7 @@ namespace School_Library.Controllers
             var books = bookRepository.GetAllBooks();
             return PartialView("_SearchResult", books);
         }
+
+        
     }
 }

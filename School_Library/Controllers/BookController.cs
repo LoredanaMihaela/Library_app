@@ -14,42 +14,15 @@ namespace School_Library.Controllers
         private BookRepository bookRepository = new BookRepository();
         // GET: Book
 
-
-        [AllowAnonymous]
-        public ActionResult Index(string sortOrder, string searchName)
+        public ActionResult GetPartialSearch()
         {
-            List<BookModel> books = bookRepository.GetAllBooks();
-            ViewBag.NameSortParam = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.AuthorSortParam = sortOrder == "author" ? "author_desc" : "author";
-            
-            books = SortName(books, sortOrder);
-
-            if (!string.IsNullOrEmpty(searchName))
-            {
-                books = bookRepository.GetNameBySearch(searchName);
-            }
-
-            return View("Index", books);
+            return PartialView("_Search");
         }
 
-        
-
-        private List<BookModel> SortName(List<BookModel> book, string sortOrder)
+        [AllowAnonymous]
+        public ActionResult Index()
         {
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    return bookRepository.OrderByDescendingParameter(book, "Name");
-
-                case "author_desc":
-                    return bookRepository.OrderByDescendingParameter(book, "Author");
-
-                case "author":
-                    return bookRepository.OrderByAscendingParameter(book, "Author");
-                    ;
-                default:
-                    return bookRepository.OrderByAscendingParameter(book, "Name");
-            }
+            return View("Index");
         }
 
 
@@ -146,10 +119,8 @@ namespace School_Library.Controllers
                 return View("DeleteBook");
             }
         }
-        public ActionResult GetPartialSearch()
-        {
-            return PartialView("_Search");
-        }
+        
 
+        
     }
 }

@@ -3,8 +3,12 @@
 <form method="get">
     <input type="text" id="txtSearch" name="Search" />
     <button type="button" id="button1">Search</button>
-    <button type="button" id="button2">Get All</button>
+    <br><br>
+    <button type="button" id="button2">Get All Books</button>
+
+  
 </form>
+<br><br>
 
 <div id="divSearchResults"></div>
 
@@ -20,5 +24,7 @@
             $("#divSearchResults").load("/Search/GetAll");
         });
 
+      
+ 
     });
 </script>
