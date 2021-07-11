@@ -188,6 +188,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OnlineBookController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -302,6 +303,8 @@
     <Content Include="Views\BorrowedOnlineBook\DeleteBorrowedOnlineBook.cshtml" />
     <Content Include="Views\BorrowedOnlineBook\Index.cshtml" />
     <Content Include="Views\BorrowedOnlineBook\BorrowedOnlineBookDetails.cshtml" />
+    <Content Include="Views\Search\_SearchResult.cshtml" />
+    <Content Include="Views\Book\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

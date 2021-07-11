@@ -1,4 +1,5 @@
-﻿@model IEnumerable<School_Library.Models.BookModel>
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+@model IEnumerable<School_Library.Models.BookModel>
 
 @{
     ViewBag.Title = "Index";
@@ -18,105 +19,15 @@
 </p>
 
 <div class="partialView">
+    <div id="divSearch"></div>
+
     <script>
         $(document).ready(function () {
 
-            $("#button1").click(function () {
-                $("#div1").load("/Index?handler=Partial");
-            });
+            $("#divSearch").load("/Book/GetPartialSearch");
 
         });
-    </script>    
-
-
-        <button  type="button" id="button1">Load Search Name</button>
-
-        <div id="div1"></div>
+    </script>
 </div>
 
 
-@using (Html.BeginForm())
-{
-    <p>
-        Search by Name: @Html.TextBox("searchName")
-        <input type="submit" value="Search">
-    </p>
-}
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IDBook)
-        </th>
-        <th>
-            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParam })
-        </th>
-        <th>
-            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParam })
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Field)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfBooks)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NumberOfBooksAvaible)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IDBook)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Field)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBooks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumberOfBooksAvaible)
-            </td>
-            <td>
-                @{
-                    if (User.IsInRole("Admin") || User.IsInRole("User"))
-                    {
-
-
-                        @Html.ActionLink("Details", "Details", new { id = item.IDBook })
-                    }
-                }
-
-
-
-                @{
-                    if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.IDBook })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IDBook })
-                    }
-                }
-
-
-
-            </td>
-        </tr>
-    }
-
-</table>

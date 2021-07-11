@@ -32,6 +32,8 @@ namespace School_Library.Controllers
             return View("Index", books);
         }
 
+        
+
         private List<BookModel> SortName(List<BookModel> book, string sortOrder)
         {
             switch (sortOrder)
@@ -144,5 +146,10 @@ namespace School_Library.Controllers
                 return View("DeleteBook");
             }
         }
+        public ActionResult GetPartialSearch()
+        {
+            return PartialView("_Search");
+        }
+
     }
 }

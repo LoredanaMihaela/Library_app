@@ -1,0 +1,79 @@
+﻿@model IEnumerable<School_Library.Models.BookModel>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDBook)
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParam })
+        </th>
+        <th>
+            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.AuthorSortParam })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Field)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfBooks)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfBooksAvaible)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDBook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Field)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBooks)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfBooksAvaible)
+            </td>
+            <td>
+                @{
+                    if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+
+
+                        @Html.ActionLink("Details", "../Book/Details", new { id = item.IDBook })
+                    }
+                }
+
+
+
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "../Book/Edit", new { id = item.IDBook })
+                        @Html.ActionLink("Delete", "../Book/Delete", new { id = item.IDBook })
+                    }
+                }
+
+
+
+            </td>
+        </tr>
+    }
+
+</table>

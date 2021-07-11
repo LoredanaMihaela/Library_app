@@ -1,0 +1,24 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<form method="get">
+    <input type="text" id="txtSearch" name="Search" />
+    <button type="button" id="button1">Search</button>
+    <button type="button" id="button2">Get All</button>
+</form>
+
+<div id="divSearchResults"></div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#button1").click(function () {
+            var val = document.getElementById("txtSearch").value
+            $("#divSearchResults").load("/Search/SearchBooks/?searchCriteria=" + val);
+        });
+
+        $("#button2").click(function () {
+            $("#divSearchResults").load("/Search/GetAll");
+        });
+
+    });
+</script>

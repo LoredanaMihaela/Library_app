@@ -78,6 +78,28 @@ namespace School_Library.Repository
                 
             return bookList;
         }
+
+        public List<BookModel> GetBooksBySearchCriteria(string searchCriteria)
+        {
+            List<BookModel> bookList = InitializeBookCollection();
+
+            if (!string.IsNullOrEmpty(searchCriteria))
+            {
+                var foundBooks = dbContext.Books
+                    .Where(x => x.Name.Contains(searchCriteria) ||
+                        x.Author.Contains(searchCriteria) ||
+                        x.Description.Contains(searchCriteria) ||
+                        x.Field.Contains(searchCriteria));
+
+                foreach (Book dbBook in foundBooks)
+                {
+                    bookList.Add(MapDbObjectToModel(dbBook));
+                }
+            }
+
+            return bookList;
+        }
+
         public void InsertBook(BookModel book)
         {
             book.IDBook = Guid.NewGuid();
